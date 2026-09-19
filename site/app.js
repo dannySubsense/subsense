@@ -7,12 +7,9 @@ const link = (id) => `#entry/${id}`;
 const esc = (value = "") => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
 function index() {
-  const first = entry("becoming-agential");
-  return `<section class="threshold" id="index" aria-labelledby="index-title">
+  return `<section class="threshold home-index" id="index" aria-label="Subsense project index">
     <video class="sheets" autoplay muted loop playsinline><source src="${archive.site.indexMedia.publicPath}" type="video/mp4" /></video><div class="threshold-shade"></div>
-    <div class="threshold-copy"><p class="kicker">${esc(archive.site.statement)}</p><h1 id="index-title">A little weather<br />enters the room.</h1><a class="enter" href="${link(first.id)}">Come closer <span>↓</span></a></div>
-    <p class="threshold-note">Wind / fabric / partial view<br />Index, 2026</p></section>
-    <section class="index-ledger" id="archive"><p class="eyebrow">Current paths</p>${archive.entries.map(card).join("")}</section>`;
+    <nav class="home-projects" aria-label="Projects">${archive.entries.map(item => `<a href="${link(item.id)}">${esc(item.title)}</a>`).join("")}</nav></section>`;
 }
 
 function card(item) {
@@ -50,12 +47,22 @@ function entryPage(item) {
 
 function render() {
   const route = location.hash.replace(/^#/, "") || "index";
+  if (route === "main") {
+    document.getElementById(route)?.scrollIntoView();
+    return;
+  }
   const [, id] = route.split("/");
   const current = route.startsWith("entry/") ? entry(id) : null;
-  main.innerHTML = current ? entryPage(current) : index();
+  const isHome = !current && route !== "archive" && route !== "about";
+  main.innerHTML = current ? entryPage(current) : route === "archive"
+    ? `<section class="index-ledger" id="archive"><h1>Archive</h1>${archive.entries.map(card).join("")}</section>`
+    : route === "about" ? `<section class="index-ledger"><h1>Danny Clarke / Subsense</h1></section>` : index();
   document.title = current ? `Subsense — ${current.title}` : "Subsense";
-  document.querySelector("#masthead").classList.toggle("on-paper", Boolean(current) || route === "archive");
+  document.querySelector("#masthead").classList.toggle("on-paper", !isHome);
+  document.body.classList.toggle("home", isHome);
+  document.querySelector("footer").hidden = isHome;
   main.focus({ preventScroll: true });
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 window.addEventListener("hashchange", render);
 render();

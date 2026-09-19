@@ -1,5 +1,7 @@
 # Decision Log
 
+Danny's latest navigation direction: the sheet home page links to all projects; each project opens as a separate scrolling composition. Removed the introductory thesis line, weather tagline, and single-project invitation from the entrance. Home navigation now lists the eleven recovered project groups with material; the empty Image Soinification folder is not presented as a project. Source: Danny's direct feedback in this session.
+
 | Date | Status | Entry | Evidence / consequence |
 | --- | --- | --- | --- |
 | 2026-09-19 | Settled | Preserve `subsense-original-content/` unchanged during discovery. | `AGENTS.md`; project context §§13–14. No source moves, edits, deduplication, or public export without an approved workflow. |

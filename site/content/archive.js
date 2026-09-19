@@ -3,7 +3,6 @@
 export const archive = {
   site: {
     title: "Subsense",
-    statement: "Danny Clarke’s evolving studio, archive, publication, and cultural atlas.",
     indexMedia: {
       publicPath: "assets/sheets.mp4",
       sourcePath: "subsense-original-content/sheet 3.mp4",
@@ -57,7 +56,23 @@ export const archive = {
       id: "bo-bot", title: "Bo-Bot, the Botanical Bot", year: "2022", type: ["experiment", "system"], status: "recovered", tags: ["plant", "light", "dialogue"],
       orientation: "A plant-lamp dialogue that asks what a plant might signal if it could direct its own artificial light.",
       provenance: { sourcePaths: ["subsense-original-content/Bo-Bot/Assignment [1] Foobot - slides.pdf", "subsense-original-content/Bo-Bot/"], editorialStatus: "Recovered; adjacent to Becoming Agential but not merged with it." }, related: ["becoming-agential", "sonic-salad"]
-    }
+    },
+    ...[
+      ["gaze-armour", "Gaze Armour", "Gaze Armour", "Performative wearable display.", "The Gaze Armor - Artists' Statement & Diagram.pdf"],
+      ["nostalgia-for-the-future", "Nostalgia for the Future", "Nostalgia for the Future", "Film and working media from the recovered archive."],
+      ["temple-for-new-babylon", "A Temple for New Babylon", "Temple For New Babylon", "Writing and design material for a Firefly Temple.", "A Temple for New Babylon Final.pdf"],
+      ["plant-is-the-message", "The Plant is the Message", "The Plant is the Message", "Plants and digital intimacy.", "Final Project_ 6483.pdf"],
+      ["screaming-pixels", "The Screaming Pixels", "The Screaming Pixels", "Images, pixels, and sound.", "Screaming Pixels.pdf"],
+      ["marine-l-systems", "L-Systems in the Marine World", "Underwater Rendering L-System", "Procedural forms and marine worlds.", "Assignment [1].pdf"],
+      ["cycloram-ai", "cycloram-ai", "cycloram-ai", "Moving images and process material from the recovered archive."]
+    ].map(([id, title, folder, orientation, source]) => ({
+      id, title, type: ["project"], status: "recovered", tags: [], orientation,
+      provenance: {
+        sourcePaths: [`subsense-original-content/${folder}/${source || ""}`],
+        editorialStatus: "Source material located; this entry currently provides an orientation."
+      },
+      related: []
+    }))
   ],
   assets: {
     "becoming-agential": { publicPath: "assets/becoming-agential.png", sourcePath: "subsense-original-content/becoming agential/Assets/becoming agential.png", alt: "Recovered Becoming Agential project image." },
