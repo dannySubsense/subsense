@@ -20,16 +20,9 @@ footer[hidden] { display: none; }
 }
 .sheet-sound:hover { color: var(--acid); }
 .sheet-sound:focus-visible { outline: 2px solid var(--acid); outline-offset: 5px; }
-.threshold h1.index-words {
-  font: 400 clamp(.8rem, 1vw, .95rem)/1.85 'Courier New', Courier, monospace;
-  letter-spacing: .015em;
-  max-width: none;
-  margin: 0 0 1.5rem;
-}
-.word-line { display: block; }
-.index-word { white-space: nowrap; }
+.index-title { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .threshold { --index-inset: clamp(1.5rem, 5vw, 5rem); }
-.threshold-copy { position: absolute; top: 27%; left: var(--index-inset); right: 0; width: auto; max-width: none; }
+.threshold-copy { position: absolute; top: calc(27% + 3rem); left: var(--index-inset); right: 0; width: auto; max-width: none; }
 .project-emitter {
   display: flex;
   align-items: center;
@@ -110,4 +103,14 @@ footer[hidden] { display: none; }
   .threshold-copy { top: 29%; }
   .index-notations { bottom: 10%; left: 35%; }
   .sheet-audio { bottom: .5rem; }
+  .registration-field span:nth-child(1) { left: 70%; }
+  .registration-field span:nth-child(2) { left: 70%; top: 36%; }
+  .registration-field span:nth-child(3) { left: 88%; }
+  .registration-field span:nth-child(4) { left: 88%; top: 36%; }
+}
+@media (max-height: 650px) and (max-width: 700px) {
+  .registration-field span:nth-child(1) { left: 65%; top: 48%; }
+  .registration-field span:nth-child(2) { left: 87%; top: 56%; }
+  .registration-field span:nth-child(3) { left: 65%; top: 66%; }
+  .registration-field span:nth-child(4) { left: 87%; top: 74%; }
 }

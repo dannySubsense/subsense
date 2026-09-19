@@ -15,10 +15,10 @@ function index() {
   return `<section class="threshold" id="index" aria-label="Subsense">
     <video class="sheets" muted playsinline preload="metadata" aria-hidden="true"></video><div class="threshold-shade"></div>
     <div class="registration-field" aria-hidden="true">${Array.from({length: 4}, () => '<span>+</span>').join('')}</div>
-    <div class="threshold-copy"><h1 class="index-words">${archive.site.indexWords[0].map(word => `<span class="index-word">${esc(word)}</span>`).join(', ')}</h1>
+    <div class="threshold-copy"><h1 class="index-title">Subsense</h1>
     <div class="project-emitter"><a class="enter" href="#archive">Projects <span>→</span></a><nav class="project-window" aria-label="Projects"><div class="project-strip">${archive.entries.map(item => `<a href="${link(item.id)}">${esc(item.title)}</a>`).join("")}</div></nav></div></div>
-    <ol class="index-notations" aria-label="Fields of attention">${[...archive.site.indexWords[1], archive.site.indexWords[2].join(', ')].map((words, i) => `<li><span class="notation-number" aria-hidden="true">[0${i + 1}]</span> ${esc(words)}</li>`).join('')}</ol>
-    <div class="sheet-audio"><div class="audio-heading"><button class="sheet-sound" type="button" aria-pressed="${sheetSound}" aria-label="Sheet audio">${sheetSound ? "Sound off" : "Sound on"}</button><output for="sheet-volume" class="volume-value">00</output></div>
+    <ol class="index-notations" aria-label="Fields of attention">${archive.site.indexWords.flat().map((word, i) => `<li><span class="notation-number" aria-hidden="true">[${String(i + 1).padStart(2, '0')}]</span> ${esc(word)}</li>`).join('')}</ol>
+    <div class="sheet-audio"><div class="audio-heading"><button class="sheet-sound" type="button" aria-pressed="${sheetSound}" aria-label="Texture audio">texture</button><output for="sheet-volume" class="volume-value">00</output></div>
     <div class="volume-ruler"><div class="ruler-ticks" aria-hidden="true">${Array.from({length: 21}, () => '<span></span>').join('')}</div><input id="sheet-volume" type="range" min="0" max="100" step="1" value="0" aria-label="Sheet audio volume" /></div></div></section>`;
 }
 
@@ -56,7 +56,6 @@ function startSheets() {
     volume.value = String(level);
     volume.setAttribute('aria-valuetext', level ? `${level} percent` : 'Muted');
     volumeValue.textContent = String(level).padStart(2, '0');
-    sound.textContent = sheetSound ? 'Sound off' : 'Sound on';
     sound.setAttribute('aria-pressed', String(sheetSound));
   };
   const play = () => video.play().catch(() => {
