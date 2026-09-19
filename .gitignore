@@ -1,0 +1,6 @@
+# Protected local source corpus: backed up separately and never versioned here.
+subsense-original-content/
+
+# Local/editor files
+.DS_Store
+Thumbs.db
