@@ -10,6 +10,22 @@
 .sequence li { border-top-color: #737373; }
 figcaption { color: #555; }
 footer[hidden] { display: none; }
+.sheet-sound {
+  position: absolute;
+  z-index: 2;
+  top: 4rem;
+  right: 1.5rem;
+  padding: .5rem 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: 12px 'Courier New', Courier, monospace;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.sheet-sound:hover { color: var(--acid); }
+.sheet-sound:focus-visible { outline: 2px solid var(--acid); outline-offset: 5px; }
 .threshold h1.index-words {
   font: 400 clamp(1rem, 1.5vw, 1.35rem)/1.85 'Courier New', Courier, monospace;
   letter-spacing: .015em;

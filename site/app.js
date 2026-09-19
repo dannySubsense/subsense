@@ -6,12 +6,14 @@ const entry = (id) => archive.entries.find((item) => item.id === id);
 const link = (id) => `#entry/${id}`;
 const esc = (value = "") => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 let sheetIndex = 0;
+let sheetSound = false;
 let stopSheets = () => {};
 let stopProjectFlow = () => {};
 
 function index() {
   return `<section class="threshold" id="index" aria-label="Subsense">
     <video class="sheets" muted playsinline preload="metadata" aria-hidden="true"></video><div class="threshold-shade"></div>
+    <button class="sheet-sound" type="button" aria-pressed="${sheetSound}" aria-label="Sheet audio">${sheetSound ? "Sound off" : "Sound on"}</button>
     <div class="threshold-copy"><h1 class="index-words">${archive.site.indexWords.map(row => `<span class="word-line">${row.map(word => `<span class="index-word">${esc(word)}</span>`).join(", ")}</span>`).join("")}</h1>
     <div class="project-emitter"><a class="enter" href="#archive">Projects <span>→</span></a><nav class="project-window" aria-label="Projects"><div class="project-strip">${archive.entries.map(item => `<a href="${link(item.id)}">${esc(item.title)}</a>`).join("")}</div></nav></div></div></section>`;
 }
@@ -36,14 +38,30 @@ function startProjectFlow() {
 
 function startSheets() {
   const video = main.querySelector('.sheets');
+  const sound = main.querySelector('.sheet-sound');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !motion.matches;
   const controller = new AbortController();
   const options = { signal: controller.signal };
+  const syncSound = () => {
+    video.muted = !sheetSound;
+    sound.textContent = sheetSound ? 'Sound off' : 'Sound on';
+    sound.setAttribute('aria-pressed', String(sheetSound));
+  };
+  const play = () => video.play().catch(() => {
+    // A browser may require a fresh gesture after navigation.
+    if (sheetSound) { sheetSound = false; syncSound(); video.play().catch(() => {}); }
+  });
+  sound.addEventListener('click', () => {
+    sheetSound = !sheetSound;
+    syncSound();
+    if (sheetSound) { playing = true; play(); }
+  }, options);
   function loadSheet() {
     const clip = archive.site.indexMedia[sheetIndex];
     video.src = clip.publicPath;
-    if (playing) video.play().catch(() => {});
+    syncSound();
+    if (playing) play();
   }
   function advance() {
     sheetIndex = (sheetIndex + 1) % archive.site.indexMedia.length;
@@ -56,7 +74,7 @@ function startSheets() {
   }, options);
   motion.addEventListener('change', () => {
     playing = !motion.matches;
-    if (playing) video.play().catch(() => {});
+    if (playing) play();
     else video.pause();
   }, options);
   loadSheet();
