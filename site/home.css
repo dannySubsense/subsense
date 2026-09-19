@@ -62,7 +62,7 @@ footer[hidden] { display: none; }
 .registration-field span { position: absolute; font: 200 23px/1 'Courier New',Courier,monospace; transform: translate(-50%,-50%); }
 .registration-field span:nth-child(1) { left: 35%; top: 62%; }
 .registration-field span:nth-child(2) { left: 52%; top: 49%; }
-.registration-field span:nth-child(3) { left: 69%; top: 62%; }
+.registration-field span:nth-child(3) { left: 69%; top: 72%; }
 .registration-field span:nth-child(4) { left: 86%; top: 49%; }
 .index-notations { position: absolute; left: calc(var(--index-inset) + 14vw); bottom: 21%; margin: 0; padding: 0; list-style: none; color: #fff; font: 11px/1.9 'Courier New',Courier,monospace; }
 .notation-number { display: inline-block; margin-right: .6rem; color: #ccc; }
@@ -96,7 +96,7 @@ footer[hidden] { display: none; }
   .sheet-audio { bottom: 1.2rem; width: 155px; }
   .registration-field span:nth-child(1) { left: 18%; top: 48%; }
   .registration-field span:nth-child(2) { left: 42%; top: 56%; }
-  .registration-field span:nth-child(3) { left: 66%; top: 48%; }
+  .registration-field span:nth-child(3) { left: 66%; top: 64%; }
   .registration-field span:nth-child(4) { left: 90%; top: 56%; }
 }
 @media (max-height: 500px) and (min-width: 701px) {
@@ -111,6 +111,6 @@ footer[hidden] { display: none; }
 @media (max-height: 650px) and (max-width: 700px) {
   .registration-field span:nth-child(1) { left: 65%; top: 48%; }
   .registration-field span:nth-child(2) { left: 87%; top: 56%; }
-  .registration-field span:nth-child(3) { left: 65%; top: 66%; }
+  .registration-field span:nth-child(3) { left: 65%; top: 82%; }
   .registration-field span:nth-child(4) { left: 87%; top: 74%; }
 }
