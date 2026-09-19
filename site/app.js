@@ -7,15 +7,19 @@ const link = (id) => `#entry/${id}`;
 const esc = (value = "") => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 let sheetIndex = 0;
 let sheetSound = false;
+let sheetVolume = .5;
 let stopSheets = () => {};
 let stopProjectFlow = () => {};
 
 function index() {
   return `<section class="threshold" id="index" aria-label="Subsense">
     <video class="sheets" muted playsinline preload="metadata" aria-hidden="true"></video><div class="threshold-shade"></div>
-    <button class="sheet-sound" type="button" aria-pressed="${sheetSound}" aria-label="Sheet audio">${sheetSound ? "Sound off" : "Sound on"}</button>
-    <div class="threshold-copy"><h1 class="index-words">${archive.site.indexWords.map(row => `<span class="word-line">${row.map(word => `<span class="index-word">${esc(word)}</span>`).join(", ")}</span>`).join("")}</h1>
-    <div class="project-emitter"><a class="enter" href="#archive">Projects <span>→</span></a><nav class="project-window" aria-label="Projects"><div class="project-strip">${archive.entries.map(item => `<a href="${link(item.id)}">${esc(item.title)}</a>`).join("")}</div></nav></div></div></section>`;
+    <div class="registration-field" aria-hidden="true">${Array.from({length: 4}, () => '<span>+</span>').join('')}</div>
+    <div class="threshold-copy"><h1 class="index-words">${archive.site.indexWords[0].map(word => `<span class="index-word">${esc(word)}</span>`).join(', ')}</h1>
+    <div class="project-emitter"><a class="enter" href="#archive">Projects <span>→</span></a><nav class="project-window" aria-label="Projects"><div class="project-strip">${archive.entries.map(item => `<a href="${link(item.id)}">${esc(item.title)}</a>`).join("")}</div></nav></div></div>
+    <ol class="index-notations" aria-label="Fields of attention">${[...archive.site.indexWords[1], archive.site.indexWords[2].join(', ')].map((words, i) => `<li><span class="notation-number" aria-hidden="true">[0${i + 1}]</span> ${esc(words)}</li>`).join('')}</ol>
+    <div class="sheet-audio"><div class="audio-heading"><button class="sheet-sound" type="button" aria-pressed="${sheetSound}" aria-label="Sheet audio">${sheetSound ? "Sound off" : "Sound on"}</button><output for="sheet-volume" class="volume-value">00</output></div>
+    <div class="volume-ruler"><div class="ruler-ticks" aria-hidden="true">${Array.from({length: 21}, () => '<span></span>').join('')}</div><input id="sheet-volume" type="range" min="0" max="100" step="1" value="0" aria-label="Sheet audio volume" /></div></div></section>`;
 }
 
 function startProjectFlow() {
@@ -39,21 +43,36 @@ function startProjectFlow() {
 function startSheets() {
   const video = main.querySelector('.sheets');
   const sound = main.querySelector('.sheet-sound');
+  const volume = main.querySelector('#sheet-volume');
+  const volumeValue = main.querySelector('.volume-value');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !motion.matches;
   const controller = new AbortController();
   const options = { signal: controller.signal };
   const syncSound = () => {
     video.muted = !sheetSound;
+    video.volume = sheetVolume;
+    const level = sheetSound ? Math.round(sheetVolume * 100) : 0;
+    volume.value = String(level);
+    volume.setAttribute('aria-valuetext', level ? `${level} percent` : 'Muted');
+    volumeValue.textContent = String(level).padStart(2, '0');
     sound.textContent = sheetSound ? 'Sound off' : 'Sound on';
     sound.setAttribute('aria-pressed', String(sheetSound));
   };
   const play = () => video.play().catch(() => {
+    if (controller.signal.aborted) return;
     // A browser may require a fresh gesture after navigation.
     if (sheetSound) { sheetSound = false; syncSound(); video.play().catch(() => {}); }
   });
   sound.addEventListener('click', () => {
     sheetSound = !sheetSound;
+    syncSound();
+    if (sheetSound) { playing = true; play(); }
+  }, options);
+  volume.addEventListener('input', () => {
+    const level = Number(volume.value) / 100;
+    sheetSound = level > 0;
+    if (level > 0) sheetVolume = level;
     syncSound();
     if (sheetSound) { playing = true; play(); }
   }, options);
