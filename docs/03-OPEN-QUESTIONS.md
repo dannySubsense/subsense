@@ -1,25 +1,24 @@
-# Open Questions for Danny
+# Open Questions
 
-## First public selection
+**Status:** no discovery blocker at present.
 
-1. Which project should be the first complete tracer bullet: Sono-Textures, Sonic Salad, Temple For New Babylon, or another recovered body of work?
-2. Which projects are private/archive-only for now, regardless of asset availability?
-3. Should a writing-led entry share equal prominence with selected work at launch?
+## Direction already established by Danny
 
-## Authorship and permissions
+- **Becoming Agential** is the first complete public tracer path.
+- No recovered project is designated archive-only at this stage.
+- Process material is public material. It is as important as, or more important than, a finished artifact; raw process, school-work documentation, and audiovisual material may be used publicly.
+- No approval gate is required for the recovered collaborative work. Credits will name Cherry, Li, and Jade for **Gaze Armour**, and Kritika and Rosalie for **The Screaming Pixels**.
+- Current working titles are **Gaze Armour** and **The Plant is the Message**. Variant tracking remains in the inventory as provenance, but is not an editorial priority.
+- Subsense’s thesis, identity, and breadth are established in `docs/00-PROJECT-CONTEXT.md`; they are not open positioning questions.
 
-1. What collaborators, performers, institutions, commissioners, photographers, or rights holders must approve/receive credit before public use of the collaborative projects?
-2. Which title variants are authoritative: Gaze Armor/Armour, Plant is/as the Message, and current titles versus recovered filenames?
-3. May source drafts, school-work documentation, raw process media, and large audiovisual files be excerpted publicly—or only a separate approved asset selection?
+## Questions to answer through making, not intake
 
-## Identity and audience
+These do not block the first path and should be resolved through real editorial and rendered work:
 
-1. What should a visitor understand in one minute: artist practice, artist-researcher practice, studio/publication, or another formulation?
-2. How visible should fabrication, architecture, computational design, and systems work be within Subsense?
-3. Who is primary at launch: curators/collaborators, peers, commissioners, readers, or a mixed public?
+1. How can the Becoming Agential record let footage, sound, plant/robot interaction, research, and technical process carry meaning without reducing the project to an explanatory case study?
+2. How can the Index use the hanging-sheet footage as a moving, materially framed threshold while remaining legible and leaving the work—not a hero treatment—as the reason to stay?
+3. What content sequence produces the right first movement from the Index into Becoming Agential and then outward into the broader archive?
 
-## Public language and boundary
+## Later, only when needed
 
-1. Is **Constellations** a public launch label, an internal concept, or later? If public, what grouping has enough authored interpretation to earn publication?
-2. How much process, incompleteness, and chronology should be visible without confusing unedited archive residue for intentional texture?
-3. What contact method and biographical facts are approved? The recovered bio draft is not enough.
+Media delivery choices and an eventual formal Constellations route should be decided at the point they become concrete implementation constraints—not as prerequisites for authoring the first path.

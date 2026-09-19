@@ -4,9 +4,9 @@
 
 Preserve the corpus; create discovery documents; query Lore; record the no-results finding. Exit when Danny can review evidence-backed choices rather than speculative design.
 
-## 1. Editorial and rights decisions
+## 1. First authored path
 
-Danny selects a first tracer project and complementary entry; confirms title/date/status, credits, permissions, and approved media; decides public identity/contact and whether Constellations appears at launch. Record decisions in `docs/06-DECISION-LOG.md` and Lore.
+Build the editorial source packet for **Becoming Agential**: draft paper, selected footage, process images, diagrams, TouchDesigner/robot workflow, and verified credits. Process is primary material. The initial Index direction is the supplied close sheet footage as a moving framed threshold, with navigation informed structurally by `inspo-homepage.png`. Record actual decisions in `docs/06-DECISION-LOG.md` and Lore.
 
 ## 2. Content-ready tracer
 
