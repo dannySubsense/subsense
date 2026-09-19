@@ -1,4 +1,5 @@
 import { archive } from "./content/archive.js";
+import { startRegistration } from "./interactions/registration.js";
 
 const main = document.querySelector("main");
 const asset = (id) => archive.assets[id];
@@ -10,11 +11,13 @@ let sheetSound = false;
 let sheetVolume = .5;
 let stopSheets = () => {};
 let stopProjectFlow = () => {};
+let stopRegistration = () => {};
 
 function index() {
   return `<section class="threshold" id="index" aria-label="Subsense">
     <video class="sheets" muted playsinline preload="metadata" aria-hidden="true"></video><div class="threshold-shade"></div>
     <div class="registration-field" aria-hidden="true">${Array.from({length: 4}, () => '<span>+</span>').join('')}</div>
+    <div class="visitor-targets" aria-hidden="true"></div>
     <div class="threshold-copy"><h1 class="index-title">Subsense</h1>
     <div class="project-emitter"><a class="enter" href="#archive">Passages <span>→</span></a><nav class="project-window" aria-label="Passages"><div class="project-strip">${archive.entries.map(item => `<a href="${link(item.id)}">${esc(item.title)}</a>`).join("")}</div></nav></div></div>
     <ol class="index-notations" start="0" aria-label="Fields of attention">${archive.site.indexWords.flat().map((word, i) => `<li><span class="notation-number" aria-hidden="true">[${String(i).padStart(2, '0')}]</span> ${esc(word)}</li>`).join('')}</ol>
@@ -144,6 +147,7 @@ function render() {
   const isHome = !current && route !== "archive" && route !== "about";
   stopSheets();
   stopProjectFlow();
+  stopRegistration();
   main.innerHTML = current ? entryPage(current) : route === "archive"
     ? `<section class="index-ledger" id="archive"><h1>Archive</h1>${archive.entries.map(card).join("")}</section>`
     : route === "about" ? `<section class="index-ledger"><h1>Danny Clarke / Subsense</h1></section>` : index();
@@ -153,6 +157,7 @@ function render() {
   document.querySelector("footer").hidden = isHome;
   stopSheets = isHome ? startSheets() : () => {};
   stopProjectFlow = isHome ? startProjectFlow() : () => {};
+  stopRegistration = isHome ? startRegistration(main.querySelector('.threshold')) : () => {};
   main.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: "instant" });
 }
