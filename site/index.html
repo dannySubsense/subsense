@@ -4,77 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Subsense — Danny Clarke's evolving studio, archive, and publication." />
-    <title>Subsense — Becoming Agential</title>
+    <title>Subsense</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a class="skip" href="#becoming">Skip to Becoming Agential</a>
-    <header class="masthead">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead" id="masthead">
       <a class="mark" href="#index">SUBSENSE<span>•</span>ART</a>
       <nav aria-label="Primary navigation">
-        <a href="#becoming">01 / Becoming Agential</a>
-        <a href="#archive">Archive →</a>
+        <a href="#index">Index</a>
+        <a href="#archive">Archive</a>
         <a href="#about">About</a>
       </nav>
     </header>
-
-    <main>
-      <section class="threshold" id="index" aria-labelledby="index-title">
-        <video class="sheets" autoplay muted loop playsinline poster="assets/becoming-agential.png">
-          <source src="assets/sheets.mp4" type="video/mp4" />
-        </video>
-        <div class="threshold-shade"></div>
-        <div class="threshold-copy">
-          <p class="kicker">Danny Clarke’s evolving studio, archive, publication</p>
-          <h1 id="index-title">A place for what becomes sensible through making.</h1>
-          <a class="enter" href="#becoming">Enter the current field <span>↓</span></a>
-        </div>
-        <p class="threshold-note">Wind / fabric / partial view<br />Index, 2026</p>
-      </section>
-
-      <section class="project-intro" id="becoming" aria-labelledby="project-title">
-        <div class="project-meta"><span>01</span><span>2022</span><span>Research / performance / system</span></div>
-        <div class="project-heading">
-          <p class="eyebrow">A first path through the archive</p>
-          <h2 id="project-title">Becoming<br /><i>Agential</i></h2>
-        </div>
-        <div class="project-statement">
-          <p>What changes when a plant, an instrument, a robotic arm, and a person make sound together?</p>
-          <p class="small">Becoming Agential stages a plant’s fluctuating biodata as instruction: a signal enters TouchDesigner, travels over a local network, and positions a robotic arm to pluck a guqin. The work does not use the system to illustrate agency. It lets agency remain distributed, contingent, and heard.</p>
-        </div>
-      </section>
-
-      <section class="image-field" aria-label="Becoming Agential visual field">
-        <figure class="full-figure"><img src="assets/becoming-agential.png" alt="Recovered Becoming Agential project image." /><figcaption>Recovered project image — source: Becoming Agential / Assets.</figcaption></figure>
-        <div class="side-by-side">
-          <figure><img src="assets/robot-plant.jpg" alt="Recovered image of Becoming Agential robotic and plant setup." /><figcaption>Plant / arm / instrument</figcaption></figure>
-          <figure class="offset"><img src="assets/plant-detail.jpg" alt="Recovered detail image from Becoming Agential process material." /><figcaption>Signal begins as fluctuation.</figcaption></figure>
-        </div>
-      </section>
-
-      <section class="sequence" aria-labelledby="sequence-title">
-        <p class="eyebrow">The apparatus is part of the composition</p>
-        <h2 id="sequence-title">A signal becomes<br />a gesture becomes<br /><i>a listening event.</i></h2>
-        <ol>
-          <li><span>01</span><p><b>Plant</b><br />Electrodes register minute changes in conductivity from a spider plant, crispy wave fern, or ZZ plant.</p></li>
-          <li><span>02</span><p><b>Translation</b><br />A biodata device sends MIDI into TouchDesigner, where notes are averaged and remapped across seven strings.</p></li>
-          <li><span>03</span><p><b>Gesture</b><br />A WebSocket carries positional instructions to a MyCobot Pi 280. The arm reaches, lowers, and plucks.</p></li>
-          <li><span>04</span><p><b>Relation</b><br />A human holds the guqin’s strings, responding and anticipating. The plant does not become an interface; it remains a participant.</p></li>
-        </ol>
-      </section>
-
-      <section class="process-film" aria-labelledby="film-title">
-        <div><p class="eyebrow">Process record</p><h2 id="film-title">Instructions in motion.</h2><p>Code, MIDI, message passing, calibration, and the repeated negotiation between a living signal and a mechanical action are not backstage documentation. They are the work’s visible tempo.</p></div>
-        <video controls muted loop playsinline poster="assets/touchdesigner.png"><source src="assets/touch-code-out.mp4" type="video/mp4" />Your browser does not support this video.</video>
-      </section>
-
-      <section class="diagram"><figure><img src="assets/touchdesigner.png" alt="Recovered TouchDesigner interface from Becoming Agential." /><figcaption>Recovered TouchDesigner process capture. Source file name retains the original working path and timestamp.</figcaption></figure></section>
-
-      <section class="research"><p class="eyebrow">Research fragment</p><blockquote>“The proposal is a re-conception of posthuman relations where algorithms and robotics are reframed as prosthetic actors.”</blockquote><p class="citation">Danny Clarke, <i>Becoming Agential</i>, draft research paper, 12 December 2022.</p></section>
-
-      <section class="archive" id="archive" aria-labelledby="archive-title"><p class="eyebrow">Outward from this path</p><h2 id="archive-title">Other signals<br />in the archive.</h2><div class="archive-links"><a href="#archive"><span>01</span><b>Sono-Textures</b><em>Sound / clay / toolpath</em></a><a href="#archive"><span>02</span><b>Sonic Salad</b><em>Garden / biodata / performance</em></a><a href="#archive"><span>03</span><b>Bo-Bot</b><em>Plant / lamp / dialogue</em></a></div></section>
-    </main>
-
-    <footer id="about"><p>Subsense is Danny Clarke’s evolving studio, archive, publication, and cultural atlas.</p><p>© Danny Clarke <span>—</span> First public tracer slice</p></footer>
+    <main id="main" tabindex="-1"></main>
+    <footer id="about"><p>Subsense is Danny Clarke’s evolving studio, archive, publication, and cultural atlas.</p><p>© Danny Clarke <span>—</span> working archive</p></footer>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
