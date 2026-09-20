@@ -53,7 +53,9 @@ footer[hidden] { display: none; }
 .project-strip:has(a:focus-visible) { animation: none; transform: none; flex-direction: row; }
 .project-strip a:focus-visible { outline: 1px solid var(--acid); outline-offset: 4px; }
 .project-window:has(a:focus-visible) { overflow: auto; mask-image: none; }
-.masthead { align-items: baseline; padding: 2rem clamp(1.4rem,5vw,5rem); font-family: 'Courier New', Courier, monospace; }
+html { scroll-padding-top: 8rem; }
+.skip:focus { position: fixed; }
+.masthead { position: fixed; align-items: baseline; padding: 2rem clamp(1.4rem,5vw,5rem); font-family: 'Courier New', Courier, monospace; }
 .masthead .mark { font: 400 clamp(13px, 1.05vw, 15px)/1.2 'Courier New', Courier, monospace; letter-spacing: .025em; white-space: nowrap; }
 .masthead .mark-word { position: relative; display: inline-block; padding: 0; color: inherit; }
 .masthead .mark-word::after { content: attr(data-text); position: absolute; inset: 0; color: inherit; opacity: .55; clip-path: inset(43% 0 43% 0); transform: translate(.8px, .25px); pointer-events: none; }
