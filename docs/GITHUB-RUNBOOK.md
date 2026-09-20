@@ -102,6 +102,8 @@ Agent names in chat are not separate GitHub identities. The local CLI currently 
 
 Recommended initial protection: require PRs, block force pushes and deletion of `main`, and require real CI checks once they exist. Do not require a human approval count until an eligible second reviewer is available. Danny's acceptance can be an explicit instruction or PR comment, followed by an authorized merge. This is a workflow convention, not a technically enforced independent review.
 
+For the solo-owner setup, the exact distinction is **PR required: yes; required approving reviews: zero**. You can merge your own PR when the configured checks and other applicable rules are satisfied. An agent using your account can do the same when authorized. The PR provides a reviewable change and test evidence; it does not require a second person's signature. Do not enable code-owner approval or last-push approval requirements that recreate the same second-reviewer dependency.
+
 Do not give agents broad admin bypasses to work around a mistaken rule. Leave auto-merge off initially. If an independent approval becomes necessary, configure an appropriately scoped identity/reviewer deliberately. Never silently share credentials among projects or change account permissions.
 
 ## 7. Coordinating multiple agents
