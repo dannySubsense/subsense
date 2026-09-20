@@ -34,21 +34,45 @@ export const archive = {
           "subsense-original-content/becoming agential/Assets/",
           "subsense-original-content/becoming agential/touch code out.mp4"
         ],
-        editorialStatus: "Selected presentation text and media, following the slide deck sequence. Hero selected by Danny. Section labels and relationship descriptions are editorial adaptations."
+        editorialStatus: "Hero selected by Danny. Encounter and sound precede a recomposed apparatus drawn from presentation pages 13–18. Process states and captions are editorial condensations, not synchronized measurements."
       },
       blocks: [
+        { type: "video", layout: "wide", title: "listen", body: "Plant, robotic arm, guqin. A studio recording, with room sound.", asset: "guqin-performance", caption: "Studio recording · 00:45" },
         { type: "text", title: "reorienting agency", sourcePages: [5, 6], paragraphs: [
           "The proposal is a theoretical question concerning the agency and intelligence that is afforded algorithms and robotics.",
           "Continuing my inquiry into plant - human creative processes, algorithms and robotics become the prosthetics of nonhuman bioagents working in collaboration with a human agent to create generative music using a Chinese guqin."
         ] },
-        { type: "text", title: "plant / human / guqin", sourcePages: [12], paragraphs: [
-          "Biodata signals from the plant position a robotic arm at one of seven strings and trigger a forward or backward plucking motion. The human holds down the strings at different positions along the guqin.",
-          "The human develops an intuition in response and anticipation, seeking harmony and synchronicity in concert with the plant."
-        ], editorialStatus: "Condensed from slide 12; describes the proposed method." },
-        { type: "media", layout: "diagram", asset: "agential-apparatus", caption: "Plant → MIDI → TouchDesigner → local network → robotic arm → guqin." },
-        { type: "video", title: "position messages", body: "TouchDesigner sends positions to the robotic arm over the local network.", asset: "touch-code-out", caption: "TouchDesigner / robot behavior" },
-        { type: "media", layout: "diagram", asset: "agential-gesture", caption: "Start position / down position / finish position." },
-        { type: "video", layout: "wide", title: "plants play the guqin", body: "Robotic arm, strings, room sound. Play to listen.", asset: "guqin-performance", caption: "Studio recording · 00:45" }
+        {
+          type: "apparatus", id: "agential-system", title: "the apparatus",
+          sourcePath: "subsense-original-content/becoming agential/becoming_agential_edited slide deck.pdf",
+          sourcePages: [12, 13, 14, 15, 16, 17, 18, 23],
+          path: "plant → MIDI → TouchDesigner → local network → arm → guqin",
+          nodes: [
+            { id: "plant", label: "plant", asset: "apparatus-plant", detail: "signal" },
+            { id: "sensor", label: "biodata device", asset: "apparatus-sensor", detail: "signal" },
+            { id: "laptop", label: "TouchDesigner", asset: "apparatus-laptop", detail: "translation" },
+            { id: "router", label: "local network", asset: "apparatus-router", detail: "translation" },
+            { id: "arm", label: "robotic arm", asset: "apparatus-arm", detail: "gesture" },
+            { id: "guqin", label: "guqin", asset: "apparatus-guqin", detail: "gesture" }
+          ],
+          overview: {
+            id: "overview", title: "plant / human / guqin",
+            text: "Biodata signals position a robotic arm at one of seven strings. A human holds the strings at different positions along the guqin, responding and anticipating. The proposal is to develop a playing relationship with the plant.",
+            sourcePages: [12],
+            media: [{ type: "image", asset: "touchdesigner", caption: "TouchDesigner network · open image to look closer" }]
+          },
+          states: [
+            { id: "signal", title: "signal", nodes: ["plant", "sensor", "laptop"], sourcePages: [14, 17],
+              text: "Changes in plant conductivity are translated into MIDI. The incoming values enter TouchDesigner as a stream of notes.",
+              media: [{ type: "video", asset: "agential-midi", caption: "MIDI input / TouchDesigner · 00:20" }] },
+            { id: "translation", title: "translation", nodes: ["laptop", "router", "arm"], sourcePages: [18, 20, 24],
+              text: "TouchDesigner turns the incoming values into position messages. A WebSocket carries those instructions across the local network to the robotic arm.",
+              media: [{ type: "video", asset: "touch-code-out", caption: "Position messages / TouchDesigner" }] },
+            { id: "gesture", title: "gesture", nodes: ["arm", "guqin"], sourcePages: [15, 23],
+              text: "Start, down, finish. Three positions describe a pluck. The human hand changes the held length of the strings; the shared instrument is where these movements become audible.",
+              media: [{ type: "strip", assets: ["gesture-start", "gesture-down", "gesture-finish"], captions: ["start", "down", "finish"] }] }
+          ]
+        }
       ],
       related: ["sonic-salad", "bo-bot", "sono-textures"],
       connections: {
@@ -90,6 +114,29 @@ export const archive = {
     }))
   ],
   assets: {
+    ...Object.fromEntries([
+      ["plant", 196, "Plant with electrode leads"],
+      ["sensor", 195, "Biodata sonification device"],
+      ["laptop", 194, "Laptop running the signal-processing system"],
+      ["router", 197, "Wi-Fi router"],
+      ["arm", 198, "MyCobot robotic arm"],
+      ["guqin", 199, "Guqin outline"]
+    ].map(([id, objectId, alt]) => [`apparatus-${id}`, {
+      publicPath: `assets/apparatus-${id}.png`,
+      sourcePath: "subsense-original-content/becoming agential/becoming_agential_edited slide deck.pdf",
+      page: 13, objectId, alt, derivative: "Original embedded image with its PDF transparency mask reconstructed; no redrawing."
+    }])),
+    ...Object.fromEntries([
+      ["start", 348, "Robotic arm at the start of a pluck"],
+      ["down", 349, "Robotic arm lowered toward the guqin strings"],
+      ["finish", 352, "Robotic arm at the finish of a pluck"]
+    ].map(([id, objectId, alt]) => [`gesture-${id}`, {
+      publicPath: `assets/gesture-${id}.jpg`,
+      sourcePath: "subsense-original-content/becoming agential/becoming_agential_edited slide deck.pdf",
+      page: 23, objectId, alt, derivative: "Original embedded JPEG extracted from the presentation."
+    }])),
+    "agential-midi": { publicPath: "assets/agential-midi.mp4", sourcePath: "subsense-original-content/becoming agential/touch midi in_1.mp4", poster: "agential-midi-poster", derivative: "Full-length 1280px H.264/AAC web copy, original audio retained." },
+    "agential-midi-poster": { publicPath: "assets/agential-midi-poster.jpg", sourcePath: "subsense-original-content/becoming agential/touch midi in_1.mp4", time: 0, alt: "Incoming MIDI values in the TouchDesigner network" },
     "becoming-agential": { publicPath: "assets/becoming-agential.png", sourcePath: "subsense-original-content/becoming agential/Assets/becoming agential.png", alt: "Overhead view of Danny’s hand holding guqin strings, with a robotic arm at the other end and plants in the foreground." },
     "agential-apparatus": { publicPath: "assets/agential-apparatus.jpg", sourcePath: "subsense-original-content/becoming agential/becoming_agential_edited slide deck.pdf", page: 18, alt: "Apparatus diagram: plant conductivity becomes MIDI, enters TouchDesigner, and sends robotic-arm movements through a WebSocket server over the local network." },
     "agential-gesture": { publicPath: "assets/agential-gesture.jpg", sourcePath: "subsense-original-content/becoming agential/becoming_agential_edited slide deck.pdf", page: 23, alt: "Five photographs trace the robotic arm from start through down to finish positions of a guqin pluck." },

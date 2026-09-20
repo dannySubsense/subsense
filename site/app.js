@@ -1,5 +1,6 @@
 import { archive } from "./content/archive.js";
 import { startRegistration } from "./interactions/registration.js";
+import { startApparatus } from "./interactions/apparatus.js";
 
 const main = document.querySelector("main");
 const asset = (id) => archive.assets[id];
@@ -12,6 +13,7 @@ let sheetVolume = .5;
 let stopSheets = () => {};
 let stopProjectFlow = () => {};
 let stopRegistration = () => {};
+let stopApparatus = () => {};
 
 function index() {
   return `<section class="threshold" id="index" aria-label="Subsense">
@@ -112,7 +114,22 @@ function media(block) {
   return `<section class="${cls}"><figure class="${block.layout === "full" ? "full-figure" : ""}"><img src="${item.publicPath}" alt="${esc(item.alt)}" loading="lazy" /><figcaption>${esc(block.caption)}</figcaption></figure></section>`;
 }
 
+function apparatus(block) {
+  const panels = [block.overview, ...block.states];
+  return `<section class="apparatus" data-apparatus aria-labelledby="${block.id}-title">
+    <header class="apparatus-heading"><div><h2 id="${block.id}-title">${esc(block.title)}</h2><p id="${block.id}-help"><span class="apparatus-pointer-help">Hover to trace. Select to stay.</span><span class="apparatus-touch-help">Select an element. Details appear below.</span></p></div><button class="apparatus-reset" type="button" aria-pressed="true">whole apparatus</button></header>
+    <div class="apparatus-layout"><div class="apparatus-field"><div class="apparatus-nodes">${block.nodes.map((node, i) => `<button class="apparatus-node" type="button" data-node="${node.id}" data-detail="${node.detail}" aria-label="${esc(node.label)}" aria-controls="${block.id}-${node.detail}" aria-describedby="${block.id}-help" aria-pressed="false"><img src="${asset(node.asset).publicPath}" alt="" loading="lazy" /><span><small aria-hidden="true">[${String(i).padStart(2, '0')}]</small>${esc(node.label)}</span></button>`).join('')}</div><p class="apparatus-route">${esc(block.path)}</p></div>
+    <div class="apparatus-inspector">${panels.map(panel => `<section id="${block.id}-${panel.id}" data-apparatus-panel="${panel.id}" data-nodes="${(panel.nodes || []).join(' ')}" ${panel.id !== 'overview' ? 'hidden' : ''} aria-labelledby="${block.id}-${panel.id}-title"><h3 id="${block.id}-${panel.id}-title">${esc(panel.title)}</h3><p>${esc(panel.text)}</p>${panel.media.map(detailMedia).join('')}</section>`).join('')}</div></div><p class="screen-reader-only" role="status" aria-live="polite"></p></section>`;
+}
+
+function detailMedia(media) {
+  if (media.type === 'strip') return `<div class="gesture-strip">${media.assets.map((id, i) => `<figure><a href="${asset(id).publicPath}" target="_blank" rel="noopener" aria-label="Open ${esc(media.captions[i])} position at full size"><img src="${asset(id).publicPath}" alt="${esc(asset(id).alt)}" loading="lazy" /></a><figcaption>${esc(media.captions[i])}</figcaption></figure>`).join('')}</div>`;
+  const item = asset(media.asset);
+  return `<figure>${media.type === 'video' ? `<video controls playsinline preload="none" aria-label="${esc(media.caption)}" ${item.poster ? `poster="${asset(item.poster).publicPath}"` : ''}><source src="${item.publicPath}" type="video/mp4" /></video>` : `<a class="apparatus-enlarge" href="${item.publicPath}" target="_blank" rel="noopener" aria-label="Open ${esc(media.caption)} at full size"><img src="${item.publicPath}" alt="${esc(item.alt)}" loading="lazy" /></a>`}<figcaption>${esc(media.caption)}</figcaption></figure>`;
+}
+
 function block(block) {
+  if (block.type === "apparatus") return apparatus(block);
   if (block.type === "text") return `<section class="entry-text"><h2>${esc(block.title)}</h2><div>${block.paragraphs.map(text => `<p>${esc(text)}</p>`).join("")}</div></section>`;
   if (block.type === "media") return media(block);
   if (block.type === "mediaPair") return `<section class="image-field"><div class="side-by-side">${block.assets.map((id, i) => { const item = asset(id); return `<figure class="${i ? "offset" : ""}"><img src="${item.publicPath}" alt="${esc(item.alt)}" /><figcaption>${esc(block.captions[i])}</figcaption></figure>`; }).join("")}</div></section>`;
@@ -148,6 +165,7 @@ function render() {
   stopSheets();
   stopProjectFlow();
   stopRegistration();
+  stopApparatus();
   main.innerHTML = current ? entryPage(current) : route === "archive"
     ? `<section class="index-ledger" id="archive"><h1>Archive</h1>${archive.entries.map(card).join("")}</section>`
     : route === "about" ? `<section class="index-ledger"><h1>Danny Clarke / Subsense</h1></section>` : index();
@@ -158,6 +176,7 @@ function render() {
   stopSheets = isHome ? startSheets() : () => {};
   stopProjectFlow = isHome ? startProjectFlow() : () => {};
   stopRegistration = isHome ? startRegistration(main.querySelector('.threshold')) : () => {};
+  stopApparatus = current ? startApparatus(main) : () => {};
   main.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: "instant" });
 }
