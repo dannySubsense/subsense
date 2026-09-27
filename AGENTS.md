@@ -25,6 +25,7 @@ The governing rule is: **preserve the whole conceptual field, but activate only 
 
 ## Operating and validation rules
 
+- Read `docs/GITHUB-RUNBOOK.md` for GitHub coordination guidance. It distinguishes recommended conventions from verified configuration; do not assume automation is enabled or treat recommendations as new merge, deployment, or settings authority.
 - Discovery precedes framework selection, branding, components, and homepage implementation.
 - Use real content to drive architecture and design. Extract capabilities from precedents; never imitate them wholesale.
 - Keep future possibilities visible without inflating the first release. Favor narrow, reversible tracer bullets.
