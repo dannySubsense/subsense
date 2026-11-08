@@ -4,6 +4,7 @@ Danny's latest navigation direction: the sheet home page links to all projects; 
 
 | Date | Status | Entry | Evidence / consequence |
 | --- | --- | --- | --- |
+| 2026-11-08 | Settled by Danny | Use `subsense.art` as the public URL, retaining Namecheap as registrar/DNS provider and GitHub Pages as host. | Danny explicitly selected the domain and saved its GitHub A records; both authoritative nameservers and public resolvers confirm the four Pages addresses and `www` CNAME. Preserve existing mail records. |
 | 2026-11-08 | Direction from Danny | Publish the site and establish a deployment workflow now; continue editorial passes with Becoming Agential the first project to complete for a show application due December 8. Finish the project before the deadline to leave application time. | Danny's direct request in this session. Publication and the necessary pipeline are authorized; no completed application or final editorial approval is implied. |
 | 2026-11-08 | Implementation direction | Use GitHub Pages with automatic PR/main validation and separately triggered publication of a validated main revision. Package browser files and selected media only. | Continues the recorded September handoff and `docs/GITHUB-RUNBOOK.md`; implementation and recovery instructions in `docs/PUBLISHING.md`. |
 | 2026-09-19 | Settled | Preserve `subsense-original-content/` unchanged during discovery. | `AGENTS.md`; project context §§13–14. No source moves, edits, deduplication, or public export without an approved workflow. |
