@@ -37,7 +37,21 @@ Open `http://127.0.0.1:4173/`. The automated test server independently checks th
 4. Confirm the run succeeds. Its summary records the public URL and commit. `version.json` on the live site must match that commit; the workflow polls for this after deployment.
 5. Review the live entrance, Becoming Agential, sound, images and narrow-screen behavior before calling the editorial pass finished.
 
-The initial publishing target is `https://dannySubsense.github.io/subsense/`. A later `subsense.art` domain cutover must preserve unrelated DNS records, including mail. Do not add a custom domain before its DNS and GitHub Pages configuration are ready.
+The intended canonical address is `https://subsense.art/`, configured as the GitHub Pages custom domain on 2026-11-08 after verifying the initial deployment at `https://dannySubsense.github.io/subsense/`. The GitHub-provided address redirects to the custom domain. Namecheap remains the registrar and DNS provider.
+
+Namecheap website records (Automatic TTL):
+
+| Type | Host | Value |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `dannysubsense.github.io` |
+
+Preserve unrelated DNS and mail configuration, including MX, TXT/DKIM and `_autodiscover._tcp` SRV records. GitHub's custom-domain setting is managed through Pages settings/API; Actions deployments do not need a `CNAME` file in the artifact.
+
+After DNS changes, inspect `gh api repos/dannySubsense/subsense/pages` for certificate readiness. Once ready, enable HTTPS enforcement with `gh api --method PUT repos/dannySubsense/subsense/pages -F https_enforced=true`. Verify HTTPS, HTTP-to-HTTPS and www-to-apex redirects, and the live `version.json`. DNS resolution alone does not prove certificate readiness. Run the browser suite against the custom domain with `SITE_URL=https://subsense.art/ npm test`.
 
 GitHub's [custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) describes the artifact/deployment permissions used here. Actions are pinned to reviewed release commits; npm dependencies use `package-lock.json`.
 
