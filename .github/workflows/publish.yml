@@ -1,0 +1,56 @@
+name: Publish site
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/validate.yml
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Deploy validated artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+      - name: Verify deployed revision
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request
+          base = os.environ['SITE_URL'].rstrip('/') + '/'
+          expected = os.environ['EXPECTED_SHA']
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(base + 'version.json?revision=' + expected, timeout=15) as response:
+                      actual = json.load(response)['revision']
+                  if actual == expected:
+                      with urllib.request.urlopen(base, timeout=15) as response:
+                          assert response.status == 200
+                      break
+              except Exception as error:
+                  print(f'Waiting for published revision: {error}')
+              time.sleep(5)
+          else:
+              raise SystemExit('Live revision verification failed; inspect deployment before retrying.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write(f'Published [{base}]({base})\n\nVerified revision: `{expected}`\n')
+          PY
