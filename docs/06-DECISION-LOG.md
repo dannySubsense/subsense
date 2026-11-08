@@ -4,6 +4,8 @@ Danny's latest navigation direction: the sheet home page links to all projects; 
 
 | Date | Status | Entry | Evidence / consequence |
 | --- | --- | --- | --- |
+| 2026-11-08 | Direction from Danny | Publish the site and establish a deployment workflow now; continue editorial passes with Becoming Agential the first project to complete for a show application due December 8. Finish the project before the deadline to leave application time. | Danny's direct request in this session. Publication and the necessary pipeline are authorized; no completed application or final editorial approval is implied. |
+| 2026-11-08 | Implementation direction | Use GitHub Pages with automatic PR/main validation and separately triggered publication of a validated main revision. Package browser files and selected media only. | Continues the recorded September handoff and `docs/GITHUB-RUNBOOK.md`; implementation and recovery instructions in `docs/PUBLISHING.md`. |
 | 2026-09-19 | Settled | Preserve `subsense-original-content/` unchanged during discovery. | `AGENTS.md`; project context §§13–14. No source moves, edits, deduplication, or public export without an approved workflow. |
 | 2026-09-19 | Settled | Thistle is the primary agent; Lore project is `subsense`; Lore/relay author is lowercase `thistle`. | `AGENTS.md`. |
 | 2026-09-19 | Finding | Four Lore searches for Subsense decisions, questions, related work, and planning returned no results. | The packet and corpus are the initial evidence base; publish this durable finding to Lore. |

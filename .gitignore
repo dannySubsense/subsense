@@ -4,3 +4,9 @@ subsense-original-content/
 # Local/editor files
 .DS_Store
 Thumbs.db
+
+# Reproducible build and local validation output
+node_modules/
+dist/
+test-results/
+playwright-report/

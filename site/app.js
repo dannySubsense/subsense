@@ -118,7 +118,7 @@ function apparatus(block) {
   const panels = [block.overview, ...block.states];
   return `<section class="apparatus" data-apparatus aria-labelledby="${block.id}-title">
     <header class="apparatus-heading"><div><h2 id="${block.id}-title">${esc(block.title)}</h2><p id="${block.id}-help"><span class="apparatus-pointer-help">Hover to trace. Select to stay.</span><span class="apparatus-touch-help">Select an element. Details appear below.</span></p></div><button class="apparatus-reset" type="button" aria-pressed="true">whole apparatus</button></header>
-    <div class="apparatus-layout"><div class="apparatus-field"><div class="apparatus-nodes">${block.nodes.map((node, i) => `<button class="apparatus-node" type="button" data-node="${node.id}" data-detail="${node.detail}" aria-label="${esc(node.label)}" aria-controls="${block.id}-${node.detail}" aria-describedby="${block.id}-help" aria-pressed="false"><img src="${asset(node.asset).publicPath}" alt="" loading="lazy" /><span><small aria-hidden="true">[${String(i).padStart(2, '0')}]</small>${esc(node.label)}</span></button>`).join('')}</div><p class="apparatus-route">${esc(block.path)}</p></div>
+    <div class="apparatus-layout"><div class="apparatus-field"><div class="apparatus-nodes">${block.nodes.map((node, i) => `<button class="apparatus-node" type="button" data-node="${node.id}" data-detail="${node.detail}" aria-label="[${String(i).padStart(2, '0')}] ${esc(node.label)}" aria-controls="${block.id}-${node.detail}" aria-describedby="${block.id}-help" aria-pressed="false"><img src="${asset(node.asset).publicPath}" alt="" loading="lazy" /><span><small aria-hidden="true">[${String(i).padStart(2, '0')}]</small>${esc(node.label)}</span></button>`).join('')}</div><p class="apparatus-route">${esc(block.path)}</p></div>
     <div class="apparatus-inspector">${panels.map(panel => `<section id="${block.id}-${panel.id}" data-apparatus-panel="${panel.id}" data-nodes="${(panel.nodes || []).join(' ')}" ${panel.id !== 'overview' ? 'hidden' : ''} aria-labelledby="${block.id}-${panel.id}-title"><h3 id="${block.id}-${panel.id}-title">${esc(panel.title)}</h3><p>${esc(panel.text)}</p>${panel.media.map(detailMedia).join('')}</section>`).join('')}</div></div><p class="screen-reader-only" role="status" aria-live="polite"></p></section>`;
 }
 
@@ -154,6 +154,7 @@ function entryPage(item) {
 }
 
 function render() {
+  const initialRender = !main.hasChildNodes();
   const route = location.hash.replace(/^#/, "") || "index";
   if (route === "main") {
     document.getElementById(route)?.scrollIntoView();
@@ -177,7 +178,7 @@ function render() {
   stopProjectFlow = isHome ? startProjectFlow() : () => {};
   stopRegistration = isHome ? startRegistration(main.querySelector('.threshold')) : () => {};
   stopApparatus = current ? startApparatus(main) : () => {};
-  main.focus({ preventScroll: true });
+  if (!initialRender) main.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 window.addEventListener("hashchange", render);
